@@ -105,7 +105,7 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
             index += 32
             code_nums.append(index)
 
-    i  =  0
+    i = 0
 
     while i < len(plain_nums):
         for index in plain_nums:
