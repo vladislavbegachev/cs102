@@ -86,8 +86,6 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     x_coord, y_coord = 3 * (pos[0] // 3), 3 * (pos[1] // 3)
     val_list = [
         grid[x][y] for x in range(x_coord, x_coord + 3) for y in range(y_coord, y_coord + 3)
-        
-
     ]
     return val_list
 
