@@ -36,11 +36,7 @@ def display(grid: tp.List[tp.List[str]]) -> None:
     line = "+".join(["-" * (width * 3)] * 3)
     for row in range(9):
         print(
-            "".join(
-                grid[row][col].center(width) + ("|" if str(col) in "25" else "")
-                for col in range(9)
-            )
-        )
+            "".join(grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)))
         if str(row) in "25":
             print(line)
     print()
@@ -85,11 +81,7 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     ['2', '8', '.', '.', '.', '5', '.', '7', '9']
     """
     x_coord, y_coord = 3 * (pos[0] // 3), 3 * (pos[1] // 3)
-    val_list = [
-        grid[x][y]
-        for x in range(x_coord, x_coord + 3)
-        for y in range(y_coord, y_coord + 3)
-    ]
+    val_list = [grid[x][y] for x in range(x_coord, x_coord + 3) for y in range(y_coord, y_coord + 3)]
     return val_list
 
 
@@ -161,23 +153,20 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
-    for i in range(len(solution)):
-        row = get_row(solution, (i, 0))
-        col = get_col(solution, (0, i))
-        block = get_block(solution, (i // 3 * 3, i % 3 * 3))
-        check_row = [
-            0 for a, row_element in enumerate(row[:-1]) if row_element in row[a + 1 :]
-        ]
-        check_col = [
-            0 for b, col_element in enumerate(col[:-1]) if col_element in col[b + 1 :]
-        ]
-        check_block = [
-            0
-            for c, block_element in enumerate(block[:-1])
-            if block_element in block[c + 1 :]
-        ]
-        if check_row or check_col or check_block or "." in row:
+    if sum(1 for row in solution for e in row if e == ".") != 0:
+        return False
+    for i in solution:
+        if len(set(i)) != len(i):
             return False
+    for j in range(9):
+        col = get_col(solution, (0, j))
+        if len(set(col)) != len(col):
+            return False
+    for k in range(0, 9, 3):
+        for m in range(0, 9, 3):
+            block = [e for row in get_block(solution, (k, m)) for e in row]
+            if len(set(block)) != len(block):
+                return False
     return True
 
 
