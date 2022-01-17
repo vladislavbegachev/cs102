@@ -36,7 +36,10 @@ def display(grid: tp.List[tp.List[str]]) -> None:
     line = "+".join(["-" * (width * 3)] * 3)
     for row in range(9):
         print(
-            "".join(grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)))
+            "".join(
+                grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)
+            )
+        )
         if str(row) in "25":
             print(line)
     print()
@@ -81,7 +84,9 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     ['2', '8', '.', '.', '.', '5', '.', '7', '9']
     """
     x_coord, y_coord = 3 * (pos[0] // 3), 3 * (pos[1] // 3)
-    val_list = [grid[x][y] for x in range(x_coord, x_coord + 3) for y in range(y_coord, y_coord + 3)]
+    val_list = [
+        grid[x][y] for x in range(x_coord, x_coord + 3) for y in range(y_coord, y_coord + 3)
+        ]
     return val_list
 
 
@@ -104,9 +109,7 @@ def find_empty_positions(
     return None
 
 
-def find_possible_values(
-    grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]
-) -> tp.Set[str]:
+def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.Set[str]:
     """Вернуть множество возможных значения для указанной позиции
 
     >>> grid = read_sudoku('puzzle1.txt')
