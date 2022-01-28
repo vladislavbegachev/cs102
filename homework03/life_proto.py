@@ -120,13 +120,13 @@ class GameOfLife:
             Список соседних клеток.
         """
         x, y = cell
-        next = []
+        neighbours = []
         for i in range(x - 1, x + 2):
             for j in range(y - 1, y + 2):
                 if 0 <= i < self.cell_height and 0 <= j < self.cell_width:
-                    next.append(self.grid[i][j])
-        next.remove(self.grid[x][y])
-        return next
+                    neighbours.append(self.grid[i][j])
+        neighbours.remove(self.grid[x][y])
+        return neighbours
 
     def get_next_generation(self) -> Grid:
         """
