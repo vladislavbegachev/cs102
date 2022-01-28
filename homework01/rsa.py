@@ -3,63 +3,31 @@ import typing as tp
 
 
 def is_prime(n: int) -> bool:
-    """
-    Tests to see if a number is prime.
-
-    >>> is_prime(2)
-    True
-    >>> is_prime(11)
-    True
-    >>> is_prime(8)
-    False
-    """
-    if n == 1:
+    if n > 1:
+        for i in range(2, n):
+            if n % i == 0:
+                return False
+    else:
         return False
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            return False
     return True
 
 
 def gcd(a: int, b: int) -> int:
-    """
-    Euclid's algorithm for determining the greatest common divisor.
-
-    >>> gcd(12, 15)
-    3
-    >>> gcd(3, 7)
-    1
-    """
-    if a == 0:
-        return b
-    elif b == 0:
-        return a
-    elif a > b:
-        return gcd(b, a % b)
-    else:
-        return gcd(a, b % a)
+    while b != 0:
+        a, b = b, a % b
+    return a
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
-    # A = phi = 40
-    # B = e = 7
-    # Find the multiplier for B for Ax + By = 1
-    A = [phi]
-    B = [e]
-    i = 0
-    while A[i] % B[i] != 0:
-        i += 1
-        A.append(B[i - 1])
-        B.append(A[i - 1] % B[i - 1])
-    x = 0
-    y = 1
-    j = 1
-    while j != i + 1:
-        temp = x
-        x = y
-        y = temp - (y * (A[-1 - j] // B[-1 - j]))
-        j += 1
-    return y % phi
+    res = []
+    while e != 0:
+        res.append((phi, e, phi % e, phi // e))
+        phi, e = e, phi % e
+    x, y = 0, 1
+    for i in range(len(res) - 1, 0, -1):
+        x, y = y, x - y * res[i - 1][3]
+    d = y % res[0][0]
+    return d
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
@@ -68,10 +36,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
     elif p == q:
         raise ValueError("p and q cannot be equal")
 
-    # n = pq
     n = p * q
-
-    # phi = (p-1)(q-1)
     phi = (p - 1) * (q - 1)
 
     # Choose an integer e such that e and phi(n) are coprime
@@ -88,7 +53,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
 
     # Return public and private keypair
     # Public key is (e, n) and private key is (d, n)
-    return (e, n), (d, n)
+    return ((e, n), (d, n))
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
