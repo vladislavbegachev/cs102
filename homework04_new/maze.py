@@ -231,5 +231,4 @@ if __name__ == "__main__":
     print(pd.DataFrame(GRID))
     _, PATH = solve_maze(GRID)
     MAZE = add_path_to_grid(GRID, PATH)
-    
     print(pd.DataFrame(MAZE))
