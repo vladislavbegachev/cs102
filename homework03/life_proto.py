@@ -54,7 +54,7 @@ class GameOfLife:
 
             self.draw_grid()
             self.draw_lines()
-            self.grid = self.get_next_generations()
+            self.grid = self.get_next_generation()
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
 
@@ -134,7 +134,7 @@ class GameOfLife:
         neighs.remove(self.grid[x][y])
         return neighs
 
-    def get_next_generations(self) -> Grid:
+    def get_next_generation(self) -> Grid:
         """
         Получить следующее поколение клеток.
 
