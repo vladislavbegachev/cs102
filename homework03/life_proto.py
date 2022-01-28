@@ -101,7 +101,7 @@ class GameOfLife:
                 x += self.cell_size
             y += self.cell_size
 
-    def get_nextours(self, cell: Cell) -> Cells:
+    def get_neighbours(self, cell: Cell) -> Cells:
         """
         Вернуть список соседних клеток для клетки `cell`.
 
