@@ -54,7 +54,7 @@ class GameOfLife:
 
             self.draw_grid()
             self.draw_lines()
-            self.grid = self.get_next_generation()
+            self.grid = self.get_next_generations()
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
 
