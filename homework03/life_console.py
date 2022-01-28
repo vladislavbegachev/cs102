@@ -35,4 +35,3 @@ if __name__ == "__main__":
     life = GameOfLife((24, 80), max_generations=50)
     ui = Console(life)
     ui.run()
-    
