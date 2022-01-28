@@ -57,7 +57,7 @@ class GameOfLife:
             # Выполнение одного шага игры (обновление состояния ячеек)
             self.draw_grid()
             self.draw_lines()
-            self.grid = self.get_next_generation()
+            self.grid = self.get_neighb_generation()
 
             pygame.display.flip()
             clock.tick(self.speed)
@@ -141,11 +141,11 @@ class GameOfLife:
         for y, row in enumerate(self.grid):
             new_row = []
             for x, cell in enumerate(row):
-                nextours = self.get_nextours((y, x))
-                live_nextours = nextours.count(1)
-                if cell and (live_nextours < 2 or live_nextours > 3):
+                neighbours = self.get_neighbours((y, x))
+                live_neighbours = neighbours.count(1)
+                if cell and (live_neighbours < 2 or live_neighbours > 3):
                     new_row.append(0)
-                elif not cell and live_nextours == 3:
+                elif not cell and live_neighbours == 3:
                     new_row.append(1)
                 else:
                     new_row.append(cell)
