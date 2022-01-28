@@ -103,3 +103,4 @@ class GameOfLife:
         with open(filename, "w", encoding="utf-8") as f:
             for row in self.curr_generation:
                 print(*row, sep="", file=f)
+                
