@@ -15,8 +15,10 @@ def draw_maze(grid: List[List[str]], size: int = 10):
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
             if cell == " ":
+
                 color = 'White'
             elif cell == "■":
+
                 color = 'black'
             elif cell == "X":
                 color = "red"
@@ -40,6 +42,7 @@ if __name__ == "__main__":
     GRID = bin_tree_maze(N, M)
 
     window = tk.Tk()
+
     window.title('Maze')
     window.geometry("%dx%d" % (M * CELL_SIZE + 100, N * CELL_SIZE + 100))
 
@@ -50,4 +53,3 @@ if __name__ == "__main__":
     ttk.Button(window, text="Solve", command=show_solution).pack(pady=20)
 
     window.mainloop()
-
